@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node scripts/guard-rm.js"
+            "command": "node .claude/hooks/guard-rm.js"
           }
         ]
       }

@@ -3,7 +3,7 @@
     "team-knowledge": {
       "command": "node",
       "args": [
-        "mcp/rag-server.js"
+        "rag/mcp-server.js"
       ]
     },
     "playwright": {

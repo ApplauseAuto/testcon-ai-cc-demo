@@ -26,7 +26,7 @@ if [ "${1:-}" = "stop" ]; then stop_shop; echo "hidden shop stopped"; exit 0; fi
 
 stop_shop
 rm -rf "$DIR" "$SHOP"
-mkdir -p "$DIR/tests" "$DIR/.claude/skills" "$SHOP/scripts"
+mkdir -p "$DIR/tests" "$DIR/.claude/skills" "$SHOP"
 
 # The copy Claude works in
 cat > "$DIR/package.json" <<'EOF'
@@ -62,9 +62,8 @@ echo '{ "mcpServers": {} }' > "$DIR/.mcp.json"
 
 # The shop, outside the copy, with the comments that explain the bug removed
 cp -R "$ROOT/site" "$SHOP/"
-cp "$ROOT/scripts/serve-site.js" "$SHOP/scripts/"
-sed -i.bak -e '/^[[:space:]]*\/\//d' "$SHOP/site/checkout.html" "$SHOP/scripts/serve-site.js" && rm -f "$SHOP"/site/*.bak "$SHOP"/scripts/*.bak
-(cd "$SHOP" && nohup node scripts/serve-site.js > shop.log 2>&1 & echo $! > "$PIDFILE")
+sed -i.bak -e '/^[[:space:]]*\/\//d' "$SHOP/site/checkout.html" "$SHOP/site/server.js" && rm -f "$SHOP"/site/*.bak
+(cd "$SHOP" && nohup node site/server.js > shop.log 2>&1 & echo $! > "$PIDFILE")
 sleep 1
 
 cat <<EOF

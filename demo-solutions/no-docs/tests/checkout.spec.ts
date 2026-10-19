@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { CheckoutPage } from "../pages/checkout.page";
-import { checkoutTexts } from "../test-data/checkout";
+import { checkoutTexts } from "../../../test-data/checkout";
 
 test("checkout completes and shows the confirmed total", async ({ page }) => {
   const checkout = new CheckoutPage(page);

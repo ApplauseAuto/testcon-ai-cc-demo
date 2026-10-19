@@ -5,7 +5,7 @@ console.log = (...args) => console.error(...args);
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
-import { search } from "../lib/rag.js";
+import { search } from "./rag.js";
 
 const server = new McpServer({ name: "team-knowledge", version: "1.0.0" });
 

@@ -1,77 +1,23 @@
-# ---------------------------------------------------------------
-# Dependencies
-# ---------------------------------------------------------------
 node_modules/
-.npm/
-.pnpm-store/
-.yarn/
-
-# ---------------------------------------------------------------
-# Secrets & local environment — never commit
-# ---------------------------------------------------------------
 .env
 .env.*
 !.env.example
-*.pem
-*.key
-*.p12
-*.pfx
-*.crt
-secrets.*
-credentials.*
-.npmrc
-.auth/
-**/.auth/*.json
 
-# ---------------------------------------------------------------
-# Claude Code — personal/local files (shared config IS committed:
-# .mcp.json, .claude/settings.json, .claude/skills/, CLAUDE.md)
-# ---------------------------------------------------------------
-.claude/settings.local.json
-.claude/*.local.*
-CLAUDE.local.md
-
-# ---------------------------------------------------------------
-# Playwright / test output
-# ---------------------------------------------------------------
+# Playwright
 test-results/
 playwright-report/
-blob-report/
-playwright/.cache/
 .playwright-mcp/
-coverage/
-*.trace.zip
 
-# ---------------------------------------------------------------
-# Demo runtime data (rebuilt by `npm run index` / the demo itself)
-# ---------------------------------------------------------------
+# RAG: built index and the downloaded embedding model (npm run index recreates them)
 data/
 .model-cache/
-generated/*
-!generated/.gitkeep
 
-# Framework generated from an internal skeleton — kept locally as a
-# stage fallback only; regenerate it with the Clappy demo.
+# Claude Code: personal settings stay out of the repo
+.claude/settings.local.json
+CLAUDE.local.md
 
-# ---------------------------------------------------------------
-# Logs & temp files (corpus/*.log are demo data and stay tracked)
-# ---------------------------------------------------------------
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-*.tmp
-*.swp
-*~
-
-# ---------------------------------------------------------------
-# OS / editor
-# ---------------------------------------------------------------
-.DS_Store
-Thumbs.db
-.idea/
-.vscode/*
-!.vscode/extensions.json
-
-# Generated frameworks contain the internal team skeleton: never commit them
+# Generated frameworks (Clappy output)
+generated/
 *.zip
+
+.DS_Store

@@ -27,10 +27,13 @@ CLAUDE.md                      team rules Claude reads every session
 .claude/skills/api-tests/      write API tests from the team docs
 .claude/skills/karpathy-guidelines/   the community skill (MIT)
 .claude/agents/test-reviewer.md       a read-only reviewer subagent
-.claude/settings.json          a hook that blocks rm -rf test-results/
-pages/, test-data/, tests/     the Demo Shop suite: page objects, expected texts, specs
+.claude/settings.json + hooks/ a hook that blocks rm -rf test-results/
+tests/, pages/, test-data/     the Demo Shop suite: specs, page object, expected texts
+site/                          the Demo Shop: checkout page + payment API (port 4173)
 corpus/                        the team's docs: runbook, API spec, conventions, a Jira ticket, CI logs
+rag/                           search over corpus/: index, search_docs MCP server, viewer, connectors
 demo-solutions/                the real results behind the slides (code, Claude's reports, tool calls)
+clappy-demo/                   three tests on saucedemo.com, the input for the Clappy demo
 ```
 
 ## Quick start

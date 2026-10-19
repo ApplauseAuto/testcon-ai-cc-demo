@@ -1,5 +1,5 @@
 // Jira → corpus/: one Markdown file per issue (## Summary, ## Description, ## Comments),
-// the format lib/rag.js splits into chunks.
+// the format rag/rag.js splits into chunks.
 //
 //   JIRA_URL=https://your-company.atlassian.net npm run connect:jira -- --jql "project = QA AND updated >= -90d"
 //   (auth: ATLASSIAN_EMAIL + ATLASSIAN_TOKEN, or ATLASSIAN_PAT; none for public instances)

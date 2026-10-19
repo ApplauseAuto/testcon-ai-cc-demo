@@ -1,4 +1,4 @@
-import { search } from "../lib/rag.js";
+import { search } from "./rag.js";
 
 const query = process.argv.slice(2).join(" ") ||
   "Why is the checkout test flaky in CI (QA-1432)?";

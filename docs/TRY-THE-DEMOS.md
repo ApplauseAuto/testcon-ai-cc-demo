@@ -65,5 +65,5 @@ fixture (no browser), and names the spec section each test is based on. Our run:
 
 ## 6. A guardrail for everyone
 
-Ask Claude to `rm -rf test-results/`: the hook in `.claude/settings.json` (`scripts/guard-rm.js`)
+Ask Claude to `rm -rf test-results/`: the hook in `.claude/settings.json` (`.claude/hooks/guard-rm.js`)
 blocks it and explains why.

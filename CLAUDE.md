@@ -2,7 +2,7 @@
 
 Fictional project for a conference demo. A Playwright suite for a checkout
 flow against a local fixture shop (`site/checkout.html` + a payment API in
-`scripts/serve-site.js`, port 4173). Playwright starts the shop automatically.
+`site/server.js`, port 4173). Playwright starts the shop automatically.
 
 ## Team decisions (read every session — this is the "memory" in the demo)
 
@@ -24,7 +24,7 @@ in what it returns, and say which document you relied on.
 
 - `search_docs` (MCP: team-knowledge) — team knowledge base (Chroma + BM25)
 - Playwright MCP (`playwright`) — drive a real browser to inspect the app
-- `/run-smoke` — run the suite; `/retrieve` — same search from the CLI
+- `/fix-flaky`, `/api-tests`, `/karpathy-guidelines` — team skills (`.claude/skills/`)
 - `test-reviewer` subagent (`.claude/agents/`) — read-only review against our conventions
 
 ## Commands

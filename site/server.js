@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 import { randomUUID } from "node:crypto";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const siteDir = path.join(__dirname, "..", "site");
+const siteDir = __dirname;
 const PORT = 4173;
 const MIN_MS = 600, MAX_MS = 2800;
 const confirmDelay = () =>

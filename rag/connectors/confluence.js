@@ -1,4 +1,4 @@
-// Confluence → corpus/: one Markdown file per page (## Content), the format lib/rag.js
+// Confluence → corpus/: one Markdown file per page (## Content), the format rag/rag.js
 // splits into chunks.
 //
 //   CONFLUENCE_URL=https://your-company.atlassian.net/wiki npm run connect:confluence -- --cql 'space = QA and type = page'

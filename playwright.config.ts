@@ -9,7 +9,7 @@ export default defineConfig({
     headless: !process.env.HEADED,
   },
   webServer: {
-    command: "node scripts/serve-site.js",
+    command: "node site/server.js",
     url: "http://localhost:4173",
     reuseExistingServer: true,
   },

@@ -12,6 +12,18 @@ corpus/  ──npm run index──▶  Chroma (Docker, :8000)  ◀──search_d
 Everything runs on your machine. The embedding model (`all-MiniLM-L6-v2`, via
 Transformers.js) is downloaded once (~90 MB) and then works offline.
 
+## Where the code is
+
+| File | What it does |
+|---|---|
+| `rag/rag.js` | splitting, local embeddings, keyword search (BM25), merging the two |
+| `rag/index.js` | `npm run index`: builds the index and loads it into Chroma |
+| `rag/mcp-server.js` | the `search_docs` tool for Claude Code |
+| `rag/viewer/` | `npm run viewer`: the knowledge map |
+| `rag/ask.js` | `npm run ask`: the same search from the terminal |
+| `rag/connectors/` | `npm run connect:jira` / `connect:confluence` |
+| `corpus/` | the documents |
+
 ## 1. Start Chroma
 
 [Chroma](https://www.trychroma.com) is a free, open-source search database. Run it in Docker:
@@ -90,13 +102,13 @@ From the terminal: `npm run ask -- "Why is the checkout test flaky in CI?"`
 
 ## 5. Connect it to Claude Code
 
-The MCP server is `mcp/rag-server.js` (about 40 lines). It's registered for this project in
+The MCP server is `rag/mcp-server.js` (about 40 lines). It's registered for this project in
 `.mcp.json`:
 
 ```json
 {
   "mcpServers": {
-    "team-knowledge": { "command": "node", "args": ["mcp/rag-server.js"] }
+    "team-knowledge": { "command": "node", "args": ["rag/mcp-server.js"] }
   }
 }
 ```
