@@ -1,0 +1,32 @@
+{
+  "name": "testcon-demo-project",
+  "version": "1.0.0",
+  "description": "Conference demo: Claude Code + RAG + Playwright MCP for test automation",
+  "scripts": {
+    "chroma": "docker run -d --name demo-chroma -p 8000:8000 -v demo-chroma-data:/data chromadb/chroma:latest",
+    "index": "node scripts/index-corpus.js",
+    "viewer": "node rag-viewer/server.js",
+    "shop": "node scripts/serve-site.js",
+    "test": "playwright test",
+    "test:solutions": "TEST_DIR=./demo-solutions playwright test",
+    "ask": "node scripts/hybrid-retrieve.js",
+    "connect:jira": "node scripts/connectors/jira.js",
+    "connect:confluence": "node scripts/connectors/confluence.js",
+    "clappy-demo:test": "playwright test -c clappy-demo/playwright.config.ts",
+    "demo:no-context": "bash scripts/demo-no-context.sh",
+    "reset": "git checkout -- tests pages test-data && git clean -fdq tests pages test-data && git worktree prune && rm -rf test-results .playwright-mcp && find generated -mindepth 1 ! -name .gitkeep -exec rm -rf {} + && echo reset: demo is back to its starting state"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.0",
+    "@xenova/transformers": "^2.17.2",
+    "chromadb": "^3.5.0",
+    "zod": "^4.6.5"
+  }
+}

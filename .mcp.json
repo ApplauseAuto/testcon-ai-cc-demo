@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "team-knowledge": {
+      "command": "node",
+      "args": [
+        "mcp/rag-server.js"
+      ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@0.0.83"
+      ]
+    }
+  }
+}

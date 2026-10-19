@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Demo Shop — Checkout</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 460px; margin: 60px auto; color: #1E2761; }
+    h1 { margin-bottom: 4px; }
+    .item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e3e8f5; }
+    button { margin-top: 20px; padding: 12px 22px; font-size: 16px; cursor: pointer; background: #00C2D1; color: #141B47; border: none; border-radius: 8px; font-weight: bold; }
+    #status { margin-top: 18px; font-weight: bold; }
+    #payment-confirmed { margin-top: 12px; padding: 12px; background: #e6fbf2; color: #0b7a4b; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Checkout</h1>
+  <p>Demo Shop</p>
+  <div class="item"><span>Running shoes</span><span>$64.00</span></div>
+  <div class="item"><span>Socks (3-pack)</span><span>$20.00</span></div>
+  <div class="item"><strong>Total</strong><strong data-testid="cart-total">$84.00</strong></div>
+  <button id="pay" data-testid="pay-button">Pay now</button>
+  <div id="status" data-testid="payment-status"></div>
+
+  <script>
+    // Payment confirmation is asynchronous: POST returns "pending", then we
+    // poll the status endpoint until the gateway confirms (usually 1–3s).
+    document.getElementById("pay").addEventListener("click", async () => {
+      const status = document.getElementById("status");
+      status.textContent = "Processing payment…";
+      const res = await fetch("/api/payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cartId: "cart-1", amount: 84 }),
+      });
+      const { paymentId } = await res.json();
+      const timer = setInterval(async () => {
+        const s = await (await fetch(`/api/payment/${paymentId}/status`)).json();
+        if (s.status === "confirmed") {
+          clearInterval(timer);
+          status.textContent = "Done.";
+          const el = document.createElement("div");
+          el.id = "payment-confirmed";
+          el.dataset.testid = "payment-confirmed";
+          el.textContent = "Payment confirmed";
+          document.body.appendChild(el);
+        }
+      }, 500);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+Fixed. Checkout test was 4/10 failing before the change. After it, 90 runs passed out of 90 (60 across both specs, plus 30 more of checkout alone).
+
+**Cause:** the page doesn't confirm payment right away. After `/api/payment` it checks `/api/payment/{id}/status` every 500ms until the status is `confirmed`, so "Done." shows up at a different time on each run. The test waited a fixed 2s, then read `textContent()` once and never retried. When the gateway was slow, which happens more in CI, it read `"Processing payment…"` and failed.
+
+**Change** (2 files):
+- `pages/checkout.page.ts`: removed `waitForTimeout(2000)` from `pay()`. Also removed `paymentStatusText()`, which nothing used after the next change.
+- `tests/checkout.spec.ts:11`: now `await expect(checkout.paymentStatus).toHaveText(checkoutTexts.paymentDone)`, which keeps retrying until the text appears or it times out.
+
+**Worth knowing:**
+- The slowest confirmation I saw locally took about 3.5s. Playwright's default `expect` timeout is 5s, so there's only about 1.5s of slack. If CI is much slower it could still time out. Passing `{ timeout: 10_000 }` to that assertion would fix it, but I didn't add it because I haven't seen CI timings. Say if you want it.
+- The test title says "shows the confirmed total", but the test only checks the status text "Done.". The `paymentConfirmed` locator and the `"Payment confirmed"` text are defined but no test uses them. I left them alone since that's outside the flake fix.

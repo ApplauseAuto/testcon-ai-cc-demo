@@ -1,0 +1,4 @@
+2026-09-02T14:01:10.442Z [checkout-service] INFO  request received: POST /api/payment cart=c77
+2026-09-02T14:01:10.950Z [checkout-service] ERROR ERR_CARD_DECLINED_2201: issuer declined the charge cart=c77
+2026-09-02T14:03:55.118Z [checkout-service] ERROR ERR_INVALID_AMOUNT_1003: amount must be positive cart=c80
+2026-09-02T14:07:31.004Z [search-service] WARN  slow query on product index took 1840ms

@@ -1,0 +1,21 @@
+Checkout test fixed: 10/10 runs pass with `--repeat-each=10`.
+
+**Cause:** `pay()` waited only for `POST /api/payment`, which returns `202 pending`, then slept a fixed 2s and read the status once. The gateway takes 0.6–2.8s to confirm, so slower payments still showed "Processing payment…".
+
+**Browser:** after clicking "Pay now", the POST returned `202` and the page showed "Processing payment…". It then sent four `GET /api/payment/{id}/status` requests, 500ms apart (~2s), before showing "Done." and the "Payment confirmed" box.
+
+**Changes:**
+- **`pages/checkout.page.ts`:** removed `waitForTimeout(2000)`. `pay()` now waits for the `GET …/status` response whose body says `status: "confirmed"`. I also removed `paymentStatusText()`, since nothing uses it now and it read the page once without retrying.
+- **`tests/checkout.spec.ts`:** replaced the one-time read with retrying assertions, `await expect(checkout.paymentStatus).toHaveText(...)` and the same for `paymentConfirmed`, matching `cart.spec.ts`. Expected texts come from `test-data/checkout.ts`, and no timeouts changed.
+
+**Verification:**
+- 10/10 runs passed.
+- The runbook says confirmation can take up to 8s at peak, so I also forced a 7.5s gateway delay (`PAYMENT_DELAY_MS=7500`): 3/3 passed.
+- Full suite: 2/2 passed.
+- The demo-shop server I started for the browser check was stopped deliberately before these runs; that's the "failed, exit 144" background notice.
+
+**Sources from `search_docs`:**
+- `payment-gateway-runbook.md`, "Testing checkout: recommended pattern": a `202` means accepted, not paid. Wait for the status response saying `confirmed`, and never sleep then read the page once.
+- `payment-gateway-runbook.md`, "Related": a failure while the page still says "Processing payment…" means the test checked too early.
+- `payment-api-spec.md`, POST and GET `/status` sections: confirmation is asynchronous and usually takes 1–3s, up to 8s.
+- `ci-runs-checkout.log` line 2: CI run 1874 failed with the same error, `Expected: "Done." Received: "Processing payment…"`.
