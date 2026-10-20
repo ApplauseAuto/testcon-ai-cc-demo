@@ -17,6 +17,7 @@ tests on Sauce Labs' public demo shop.
 | **/karpathy-guidelines**: the skill, how to install it, how we used it, reading list | [`docs/KARPATHY-GUIDELINES.md`](docs/KARPATHY-GUIDELINES.md) |
 | **Try the demos yourself**: the flaky test, `/fix-flaky`, Claude without your docs | [`docs/TRY-THE-DEMOS.md`](docs/TRY-THE-DEMOS.md) |
 | **Clappy SDK**: what it is (not open source) and the Swag Labs demo | [`docs/CLAPPY.md`](docs/CLAPPY.md), [`clappy-demo/`](clappy-demo/) |
+| **Everything else Clappy and our test platform do**: chatbot testing, localization, RAG Forge, CI and more | [`docs/CLAPPY-FEATURES.md`](docs/CLAPPY-FEATURES.md) |
 
 ## The team setup from the talk
 

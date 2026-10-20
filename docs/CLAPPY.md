@@ -75,6 +75,11 @@ Verify the page shows "Thank you for your order!".
 The hand-written equivalents are in [`clappy-demo/flows/`](../clappy-demo/flows/) and run as they are:
 `npm run clappy-demo:test`.
 
+## Everything else
+
+The demo shows one job. For chatbot testing, localization, RAG Forge, CI runs and the
+rest, see [`CLAPPY-FEATURES.md`](CLAPPY-FEATURES.md).
+
 ## Access
 
 Clappy is used inside Applause today. If you want to try it on your own tests, talk to us
